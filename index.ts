@@ -51,10 +51,14 @@ downloads.each(async (i, el) => {
 				minecraftVersions[version.minecraft] = [];
 			minecraftVersions[version.minecraft].push(version);
 
-			if (!latest && version.preview == false)
+			if (!latest && version.preview == false) {
 				latest = version;
-			if (!latestPre && version.preview == true)
+				await writeFileAsync("./out/latest", JSON.stringify(version));
+			}
+			if (!latestPre && version.preview == true) {
 				latestPre = version;
+				await writeFileAsync("./out/latestPre", JSON.stringify(version));
+			}
 		}
 
 		for(var mcVersion in minecraftVersions) {
