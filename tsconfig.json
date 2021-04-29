@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"moduleResolution": "node",
+		"pretty": false,
+		"target": "ESNext",
+		"module": "ESNext",
+		"inlineSources": true,
+		"inlineSourceMap": true,
+		"esModuleInterop": true
+	},
+	"include": [
+		"*.ts"
+	],
+	"exclude": [
+		"node_modules"
+	]
+}
