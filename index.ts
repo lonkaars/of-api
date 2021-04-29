@@ -1,5 +1,9 @@
 import puppeteer from 'puppeteer';
 import cheerio from 'cheerio';
+import { writeFile } from 'fs';
+import { promisify } from 'util';
+
+var writeFileAsync = promisify(writeFile);
 
 import * as types from './types';
 
@@ -53,6 +57,10 @@ downloads.each(async (i, el) => {
 				latestPre = version;
 		}
 
+		for(var mcVersion in minecraftVersions) {
+			await writeFileAsync("./out/" + mcVersion, JSON.stringify(minecraftVersions[mcVersion]));
+		}
+
 		var response: types.APIResponse = {
 			lastUpdate: Date.now(),
 			all: versions,
@@ -61,7 +69,7 @@ downloads.each(async (i, el) => {
 			latestPre
 		}
 
-		console.log(JSON.stringify(response));
+		await writeFileAsync("./out/all", JSON.stringify(response));
 		process.exit(0);
 	}
 });

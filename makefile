@@ -1,4 +1,4 @@
-all: source
+all:
+	mkdir out
+	node .
 
-source:
-	node . > downloads.html
