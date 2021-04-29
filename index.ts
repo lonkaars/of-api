@@ -43,6 +43,15 @@ downloads.each(async (i, el) => {
 	}
 	versions.push(version);
 	if( i == downloadCount - 1 ) {
+		versions = versions.sort((a, b) => {
+			var dateFormat = /(\d{2})\.(\d{2})\.(\d{4})/;
+			var aR = a.date.match(dateFormat);
+			var bR = b.date.match(dateFormat);
+			return ( new Date(Number(bR[3]), Number(bR[2]) - 1, Number(bR[1])).getTime() ) -
+				   ( new Date(Number(aR[3]), Number(aR[2]) - 1, Number(aR[1])).getTime() );
+		});
+		console.log(versions)
+
 		var minecraftVersions = {};
 		var latest: types.OptifineVersion;
 		var latestPre: types.OptifineVersion;
