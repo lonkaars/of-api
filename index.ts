@@ -50,7 +50,6 @@ downloads.each(async (i, el) => {
 			return ( new Date(Number(bR[3]), Number(bR[2]) - 1, Number(bR[1])).getTime() ) -
 				   ( new Date(Number(aR[3]), Number(aR[2]) - 1, Number(aR[1])).getTime() );
 		});
-		console.log(versions)
 
 		var minecraftVersions = {};
 		var latest: types.OptifineVersion;
