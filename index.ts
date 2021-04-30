@@ -1,5 +1,5 @@
-import puppeteer from 'puppeteer';
 import cheerio from 'cheerio';
+import axios from 'axios';
 import { writeFile } from 'fs';
 import { promisify } from 'util';
 
@@ -7,14 +7,9 @@ var writeFileAsync = promisify(writeFile);
 
 import * as types from './types';
 
-var browser = await puppeteer.launch();
-
 async function getPageHTML(url: string) {
-	var page = await browser.newPage();
-	await page.goto(url, { waitUntil: 'domcontentloaded' });
-	var content = await page.content();
-	await page.close();
-	return content
+	var response = await axios(url)
+	return response.data
 }
 
 var html = await getPageHTML('https://optifine.net/downloads');
@@ -82,7 +77,6 @@ downloads.each(async (i, el) => {
 		}
 
 		await writeFileAsync("./out/all", JSON.stringify(response));
-		process.exit(0);
 	}
 });
 
